@@ -10,11 +10,11 @@ import (
 	"runtime"
 )
 
-// #include "version.h"
-import "C"
-
-const Number = C.WIREGUARD_WINDOWS_VERSION_STRING
-
 func UserAgent() string {
-	return fmt.Sprintf("WireGuard/%s (%s; %s)", Number, OsName(), runtime.GOARCH)
+	return fmt.Sprintf("WireGuard/%s (%s; %s)", Number(), OsName(), runtime.GOARCH)
+}
+
+func Number() string {
+	// TODO: Get VERSION_INFO resource of the EXE and read version from there.
+	return "0.1.1"
 }

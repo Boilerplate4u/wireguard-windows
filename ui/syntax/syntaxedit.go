@@ -15,6 +15,12 @@ import (
 	"github.com/lxn/win"
 )
 
+const (
+	InevaluableBlockingUntunneledTraffic int = 0
+	BlockingUntunneledTraffic            int = 1
+	NotBlockingUntunneledTraffic         int = 2
+)
+
 type SyntaxEdit struct {
 	walk.WidgetBase
 	textChangedPublisher            walk.EventPublisher

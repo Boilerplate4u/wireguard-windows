@@ -4,9 +4,11 @@
  */
 
 #include <windows.h>
-#include "version/version.h"
 
 #pragma code_page(65001) // UTF-8
+
+#define WIREGUARD_WINDOWS_VERSION_ARRAY 0,1,1
+#define WIREGUARD_WINDOWS_VERSION_STRING "0.1.1"
 
 LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST manifest.xml

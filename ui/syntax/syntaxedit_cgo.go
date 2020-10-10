@@ -16,12 +16,6 @@ import (
 // #include "syntaxedit.h"
 import "C"
 
-const (
-	InevaluableBlockingUntunneledTraffic = C.InevaluableBlockingUntunneledTraffic
-	BlockingUntunneledTraffic            = C.BlockingUntunneledTraffic
-	NotBlockingUntunneledTraffic         = C.NotBlockingUntunneledTraffic
-)
-
 func (se *SyntaxEdit) WndProc(hwnd win.HWND, msg uint32, wParam, lParam uintptr) uintptr {
 	switch msg {
 	case win.WM_NOTIFY, win.WM_COMMAND:

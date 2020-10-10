@@ -6,7 +6,7 @@ export GOOS := windows
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 SOURCE_FILES := $(call rwildcard,,*.go *.c *.h) .deps/prepared go.mod go.sum
-RESOURCE_FILES := resources.rc version/version.h manifest.xml $(patsubst %.svg,%.ico,$(wildcard ui/icon/*.svg))
+RESOURCE_FILES := resources.rc manifest.xml $(patsubst %.svg,%.ico,$(wildcard ui/icon/*.svg))
 
 DEPLOYMENT_HOST ?= winvm
 DEPLOYMENT_PATH ?= Desktop

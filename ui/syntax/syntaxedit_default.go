@@ -30,8 +30,8 @@ func makeSyntaxEdit(parent walk.Container) (*SyntaxEdit, error) {
 	err := walk.InitWidget(
 		se,
 		parent,
-		"RICHEDIT50W",
-		win.WS_CHILD|win.ES_MULTILINE|win.WS_VISIBLE|win.WS_VSCROLL|win.WS_BORDER|win.WS_HSCROLL|win.WS_TABSTOP|win.ES_WANTRETURN| /*win.ES_NOOLEDRAGDROP*/ 0x8,
+		win.MSFTEDIT_CLASS,
+		win.WS_CHILD|win.ES_MULTILINE|win.WS_VISIBLE|win.WS_VSCROLL|win.WS_BORDER|win.WS_HSCROLL|win.WS_TABSTOP|win.ES_WANTRETURN|win.ES_NOOLEDRAGDROP,
 		0,
 	)
 	if err != nil {
