@@ -46,9 +46,21 @@ if exist .deps\prepared goto :render
 	set CGO_ENABLED=1
 	set CGO_CFLAGS=-O3 -Wall -Wno-unused-function -Wno-switch -std=gnu11 -DWINVER=0x0601
 	set CGO_LDFLAGS=-Wl,--dynamicbase -Wl,--nxcompat -Wl,--export-all-symbols
-	call :build_plat x86 i686 386 || goto :error
+	set PATH=%BUILDDIR%.deps\i686-w64-mingw32-native\bin;%PATH%
+	set CC=i686-w64-mingw32-gcc
+	set GOARCH=386
+	call :build_plat x86 || goto :error
 	set CGO_LDFLAGS=%CGO_LDFLAGS% -Wl,--high-entropy-va
-	call :build_plat amd64 x86_64 amd64 || goto :error
+	set PATH=%BUILDDIR%.deps\x86_64-w64-mingw32-native\bin;%PATH%
+	set CC=x86_64-w64-mingw32-gcc
+	set GOARCH=amd64
+	call :build_plat amd64 || goto :error
+	set GOARM=7
+	set CGO_LDFLAGS=-Wl,--dynamicbase -Wl,--nxcompat -Wl,--export-all-symbols
+	set PATH=%BUILDDIR%.deps\MinGW-arm-eabi-glo-5.2.0\bin;%PATH%
+	set CC=arm-eabi-gcc
+	set GOARCH=arm
+	call :build_plat arm || goto :error
 
 :sign
 	if exist .\sign.bat call .\sign.bat
@@ -73,9 +85,6 @@ if exist .deps\prepared goto :render
 	goto :eof
 
 :build_plat
-	set PATH=%BUILDDIR%.deps\%~2-w64-mingw32-native\bin;%PATH%
-	set CC=%~2-w64-mingw32-gcc
-	set GOARCH=%~3
 	mkdir %1 >NUL 2>&1
 	echo [+] Assembling resources %1
 	windres -i resources.rc -o resources.syso -O coff || exit /b %errorlevel%
